@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +12,7 @@ part 'api_client.g.dart';
 Future<List<Post>> posts(Ref ref) async {
   final resp = await http.get(
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
     },
     Uri.parse('https://jsonplaceholder.typicode.com/posts'),
   );
@@ -19,7 +20,7 @@ Future<List<Post>> posts(Ref ref) async {
   final datas = jsonDecode(resp.body) as List<dynamic>;
   return datas
       .map(
-        (e) => Post.fromJson(e),
+        (post) => Post.fromJson(post),
       )
       .toList();
 }
