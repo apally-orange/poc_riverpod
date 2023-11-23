@@ -9,7 +9,13 @@ class Posts extends _$Posts {
   @override
   FutureOr<List<Post>> build() {
     final datas = ref.watch(apiPostsProvider).asData?.value ?? [];
-    return datas.take(3).toList();
+    final search = ref.watch(searchBarServiceProvider);
+
+    return datas
+        .where(
+          (post) => post.title.toLowerCase().contains(search),
+        )
+        .toList();
   }
 
   void addPost() async {
@@ -19,5 +25,17 @@ class Posts extends _$Posts {
       const Post(id: 1, title: 'title', body: 'body'),
       ...previouState,
     ]);
+  }
+}
+
+@riverpod
+class SearchBarService extends _$SearchBarService {
+  @override
+  String build() {
+    return '';
+  }
+
+  void search(String value) {
+    state = value.toLowerCase();
   }
 }

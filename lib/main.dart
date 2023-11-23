@@ -18,7 +18,9 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Poc')),
+        appBar: AppBar(
+          title: const Text('Poc'),
+        ),
         body: const PostsView(),
         floatingActionButton: const AddPostButton(),
       ),

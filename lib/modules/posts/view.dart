@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poc_archi/data/models/post.dart';
 import 'package:poc_archi/modules/posts/notifier.dart';
+import 'package:poc_archi/modules/posts/search_bar.dart';
 
 class PostsView extends ConsumerWidget {
   const PostsView({super.key});
@@ -28,16 +29,22 @@ class _ListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (posts.isEmpty) {
-      return const Text('Empty data');
-    }
-
-    return ListView.separated(
-      itemCount: posts.length,
-      itemBuilder: (context, index) => _PostTile(
-        post: posts[index],
-      ),
-      separatorBuilder: (context, _) => const Divider(),
+    return Column(
+      children: [
+        const SearchBarView(),
+        if (posts.isEmpty)
+          const Text('Empty data')
+        else
+          Expanded(
+            child: ListView.separated(
+              itemCount: posts.length,
+              itemBuilder: (context, index) => _PostTile(
+                post: posts[index],
+              ),
+              separatorBuilder: (context, _) => const Divider(),
+            ),
+          ),
+      ],
     );
   }
 }
