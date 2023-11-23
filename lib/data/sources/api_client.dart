@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'api_client.g.dart';
 
 @riverpod
-Future<List<Post>> posts(Ref ref) async {
+Future<List<Post>> apiPosts(Ref ref) async {
   final resp = await http.get(
     headers: {
       HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',

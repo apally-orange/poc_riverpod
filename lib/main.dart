@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:poc_archi/modules/posts/add_button.dart';
 import 'package:poc_archi/modules/posts/view.dart';
 
 void main() {
@@ -19,6 +20,7 @@ class MainApp extends ConsumerWidget {
       home: Scaffold(
         appBar: AppBar(title: const Text('Poc')),
         body: const PostsView(),
+        floatingActionButton: const AddPostButton(),
       ),
     );
   }

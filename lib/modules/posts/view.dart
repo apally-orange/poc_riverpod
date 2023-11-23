@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poc_archi/data/models/post.dart';
-import 'package:poc_archi/data/sources/api_client.dart';
+import 'package:poc_archi/modules/posts/notifier.dart';
 
 class PostsView extends ConsumerWidget {
   const PostsView({super.key});
