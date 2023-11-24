@@ -25,7 +25,11 @@ void main() {
         futureStringProvider.overrideWith((ref) => 'tata'),
       ]);
 
+      final sub = container.listen(basicStringProvider, (_, __) {});
+
       expect(container.read(basicStringProvider), 'toto');
+
+      expect(sub.read(), 'toto');
 
       await expectLater(
         container.read(futureStringProvider.future),
