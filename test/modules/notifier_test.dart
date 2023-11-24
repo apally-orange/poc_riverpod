@@ -3,11 +3,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:poc_archi/modules/posts/notifier.dart';
 
+class MockSearchBarService extends AutoDisposeNotifier<String>
+    with Mock
+    implements SearchBarService {}
+
 void main() {
   late final MockCat cat;
+  late final MockSearchBarService mockSearch;
 
   setUpAll(() {
     cat = MockCat();
+    mockSearch = MockSearchBarService();
   });
 
   group('group 1: ', () {
@@ -35,6 +41,34 @@ void main() {
         container.read(futureStringProvider.future),
         completion('tata'),
       );
+    });
+
+    test('Test Riverpod 2', () async {
+      when(
+        () => mockSearch.build(),
+      ).thenAnswer((invocation) => 'hello');
+
+      final container = ProviderContainer(overrides: [
+        searchBarServiceProvider.overrideWith(() => mockSearch),
+      ]);
+
+      expect(container.read(searchBarServiceProvider), 'hello');
+
+      expect(container.read(basicStringProvider), 'search: hello');
+    });
+
+    test('Test Riverpod 3', () async {
+      when(
+        () => mockSearch.build(),
+      ).thenAnswer((invocation) => 'hello');
+
+      final container = ProviderContainer(overrides: [
+        searchBarServiceProvider.overrideWith(() => mockSearch),
+      ]);
+
+      expect(container.read(searchBarServiceProvider), 'hello');
+
+      expect(container.read(testMultiProvider), 'multi: hello');
     });
   });
 }

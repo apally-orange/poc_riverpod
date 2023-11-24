@@ -62,7 +62,9 @@ class _PostTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(post.title),
+      title: Text(
+        post.title,
+      ),
       subtitle: Text(post.body),
       onTap: () => context.goNamed(AppRoute.detail.name, extra: post),
     );

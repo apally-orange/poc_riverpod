@@ -6,7 +6,7 @@ part of 'notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$basicStringHash() => r'1b992460ec24453567b3ea3751beb00d7748c6fb';
+String _$basicStringHash() => r'59897b33929af9559926e63add39f3dc10f2a533';
 
 /// See also [basicString].
 @ProviderFor(basicString)
@@ -34,6 +34,21 @@ final futureStringProvider = AutoDisposeFutureProvider<String>.internal(
 );
 
 typedef FutureStringRef = AutoDisposeFutureProviderRef<String>;
+String _$testMultiHash() => r'7ffb60c270ba8c6b1f5900e9032866ff2060c35a';
+
+/// See also [TestMulti].
+@ProviderFor(TestMulti)
+final testMultiProvider =
+    AutoDisposeNotifierProvider<TestMulti, String>.internal(
+  TestMulti.new,
+  name: r'testMultiProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$testMultiHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TestMulti = AutoDisposeNotifier<String>;
 String _$postsHash() => r'083d4b243aea515cccae441eb0ee95c0291f27e8';
 
 /// See also [Posts].
@@ -49,7 +64,7 @@ final postsProvider =
 );
 
 typedef _$Posts = AutoDisposeAsyncNotifier<List<Post>>;
-String _$searchBarServiceHash() => r'327ee2c858fe71a55a3764f4f0d148ecccab85ca';
+String _$searchBarServiceHash() => r'3d45a3a6c7e722f2514b14dd8f5f06b05a0cf6d1';
 
 /// See also [SearchBarService].
 @ProviderFor(SearchBarService)
