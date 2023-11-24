@@ -64,7 +64,7 @@ class _PostTile extends StatelessWidget {
     return ListTile(
       title: Text(post.title),
       subtitle: Text(post.body),
-      onTap: () => context.go('/${AppRoute.detail}', extra: post),
+      onTap: () => context.goNamed(AppRoute.detail.name, extra: post),
     );
   }
 }

@@ -9,14 +9,16 @@ part 'router.g.dart';
 @Riverpod(keepAlive: true)
 GoRouter router(RouterRef ref) {
   return GoRouter(
-    initialLocation: AppRoute.root,
+    initialLocation: AppRoute.root.path,
     routes: [
       GoRoute(
-        path: AppRoute.root,
+        path: AppRoute.root.path,
+        name: AppRoute.root.name,
         builder: (context, state) => const HomeView(),
         routes: [
           GoRoute(
-            path: AppRoute.detail,
+            path: AppRoute.detail.path,
+            name: AppRoute.detail.name,
             builder: (context, state) {
               final post = state.extra as Post;
 
@@ -30,6 +32,10 @@ GoRouter router(RouterRef ref) {
 }
 
 class AppRoute {
-  static const String root = '/';
-  static const String detail = 'detail';
+  const AppRoute._(this.path, this.name);
+  final String path;
+  final String name;
+
+  static const AppRoute root = AppRoute._('/', 'root');
+  static const AppRoute detail = AppRoute._('detail', 'detail');
 }
