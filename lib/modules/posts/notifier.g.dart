@@ -49,7 +49,7 @@ final postsProvider =
 );
 
 typedef _$Posts = AutoDisposeAsyncNotifier<List<Post>>;
-String _$searchBarServiceHash() => r'3d45a3a6c7e722f2514b14dd8f5f06b05a0cf6d1';
+String _$searchBarServiceHash() => r'327ee2c858fe71a55a3764f4f0d148ecccab85ca';
 
 /// See also [SearchBarService].
 @ProviderFor(SearchBarService)

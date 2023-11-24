@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:poc_archi/modules/posts/add_button.dart';
-import 'package:poc_archi/modules/posts/view.dart';
+import 'package:poc_archi/router/router.dart';
 
 void main() {
   runApp(
@@ -16,14 +15,10 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Poc'),
-        ),
-        body: const PostsView(),
-        floatingActionButton: const AddPostButton(),
-      ),
+    final router = ref.watch(routerProvider);
+
+    return MaterialApp.router(
+      routerConfig: router,
     );
   }
 }

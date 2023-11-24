@@ -38,7 +38,7 @@ class Posts extends _$Posts {
 class SearchBarService extends _$SearchBarService {
   @override
   String build() {
-    return 'azerty';
+    return '';
   }
 
   void search(String value) {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poc_archi/data/models/post.dart';
-import 'package:poc_archi/modules/detail/view.dart';
 import 'package:poc_archi/modules/posts/notifier.dart';
 import 'package:poc_archi/modules/posts/search_bar.dart';
+import 'package:poc_archi/router/router.dart';
 
 class PostsView extends ConsumerWidget {
   const PostsView({super.key});
@@ -63,11 +64,7 @@ class _PostTile extends StatelessWidget {
     return ListTile(
       title: Text(post.title),
       subtitle: Text(post.body),
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => DetailView(post: post),
-        ),
-      ),
+      onTap: () => context.go('/${AppRoute.detail}', extra: post),
     );
   }
 }
