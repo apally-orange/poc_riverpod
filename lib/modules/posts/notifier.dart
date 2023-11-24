@@ -5,6 +5,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'notifier.g.dart';
 
 @riverpod
+String basicString(BasicStringRef ref) => 'Hello world';
+
+@riverpod
+Future<String> futureString(FutureStringRef ref) async => 'Hello world';
+
+@riverpod
 class Posts extends _$Posts {
   @override
   FutureOr<List<Post>> build() {
@@ -32,7 +38,7 @@ class Posts extends _$Posts {
 class SearchBarService extends _$SearchBarService {
   @override
   String build() {
-    return '';
+    return 'azerty';
   }
 
   void search(String value) {

@@ -1,20 +1,36 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:poc_archi/modules/posts/notifier.dart';
 
 void main() {
   late final MockCat cat;
 
-  setUp(() {
+  setUpAll(() {
     cat = MockCat();
   });
 
-  group('group 1', () {
+  group('group 1: ', () {
     test('Test 1', () async {
       when(() => cat.likes(any())).thenAnswer((_) async => true);
       expect(await cat.likes('tt'), true);
 
       when(() => cat.sound()).thenReturn('Tata');
       expect(cat.sound(), 'Tata');
+    });
+
+    test('Test Riverpod', () async {
+      final container = ProviderContainer(overrides: [
+        basicStringProvider.overrideWith((ref) => 'toto'),
+        futureStringProvider.overrideWith((ref) => 'tata'),
+      ]);
+
+      expect(container.read(basicStringProvider), 'toto');
+
+      await expectLater(
+        container.read(futureStringProvider.future),
+        completion('tata'),
+      );
     });
   });
 }
