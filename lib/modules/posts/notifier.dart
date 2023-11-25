@@ -5,21 +5,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'notifier.g.dart';
 
 @riverpod
-String basicString(BasicStringRef ref) =>
-    'search: ${ref.watch(searchBarServiceProvider)}';
-
-@riverpod
-Future<String> futureString(FutureStringRef ref) async => 'Hello world';
-
-@riverpod
-class TestMulti extends _$TestMulti {
-  @override
-  String build() {
-    return 'multi: ${ref.watch(searchBarServiceProvider)}';
-  }
-}
-
-@riverpod
 class Posts extends _$Posts {
   @override
   FutureOr<List<Post>> build() {
