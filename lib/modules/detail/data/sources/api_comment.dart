@@ -4,24 +4,24 @@ import 'dart:io';
 import 'package:http/http.dart';
 import 'package:poc_archi/core/api_client.dart';
 import 'package:poc_archi/core/config.dart';
-import 'package:poc_archi/data/models/post.dart';
+import 'package:poc_archi/modules/detail/data/models/comment.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'api_post.g.dart';
+part 'api_comment.g.dart';
 
 @riverpod
-ApiPost apiPosts(ApiPostsRef ref) {
+ApiComment apiComments(ApiCommentsRef ref) {
   final client = ref.watch(apiClientProvider);
   final config = ref.watch(configProvider);
 
-  return ApiPost(
+  return ApiComment(
     client: client,
     config: config,
   );
 }
 
-class ApiPost {
-  const ApiPost({
+class ApiComment {
+  const ApiComment({
     required this.client,
     required this.config,
   });
@@ -29,19 +29,20 @@ class ApiPost {
   final Client client;
   final Config config;
 
-  Future<List<Post>> getPosts() async {
+  FutureOr<List<Comment>> getComments(int postId) async {
     final resp = await client.get(
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
       },
-      Uri.parse('${config.authority}/posts'),
+      Uri.parse('${config.authority}/comments?postId=$postId'),
     );
 
     final datas = jsonDecode(resp.body) as List<dynamic>;
-    print('Api: getPosts ${datas.length}');
+    print('Api: getComments ${datas.length}');
+
     return datas
         .map(
-          (post) => Post.fromJson(post),
+          (post) => Comment.fromJson(post),
         )
         .toList();
   }
