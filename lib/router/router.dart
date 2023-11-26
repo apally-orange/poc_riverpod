@@ -21,6 +21,7 @@ GoRouter router(RouterRef ref) {
             name: AppRoute.detail.name,
             builder: (context, state) {
               final post = state.extra as Post;
+              print('Router: DetailView ${post.id}');
 
               return DetailView(post: post);
             },

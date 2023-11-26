@@ -11,12 +11,17 @@ class PostsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ret = ref.watch(postsProvider);
+    final ret = ref.watch(filteredPostProvider);
 
-    return ret.when(
-      data: (datas) => _ListView(posts: datas),
-      error: (error, st) => const SizedBox.shrink(),
-      loading: () => const CircularProgressIndicator(),
+    return Column(
+      children: [
+        const SearchBarView(),
+        ret.when(
+          data: (datas) => _ListView(posts: datas),
+          error: (error, st) => const SizedBox.shrink(),
+          loading: () => const CircularProgressIndicator(),
+        ),
+      ],
     );
   }
 }
@@ -31,23 +36,19 @@ class _ListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SearchBarView(),
-        if (posts.isEmpty)
-          const Text('Empty data')
-        else
-          Expanded(
-            child: ListView.separated(
-              itemCount: posts.length,
-              itemBuilder: (context, index) => _PostTile(
-                post: posts[index],
-              ),
-              separatorBuilder: (context, _) => const Divider(),
-            ),
+    if (posts.isEmpty) {
+      return const Text('Empty data');
+    } else {
+      return Expanded(
+        child: ListView.separated(
+          itemCount: posts.length,
+          itemBuilder: (context, index) => _PostTile(
+            post: posts[index],
           ),
-      ],
-    );
+          separatorBuilder: (context, _) => const Divider(),
+        ),
+      );
+    }
   }
 }
 

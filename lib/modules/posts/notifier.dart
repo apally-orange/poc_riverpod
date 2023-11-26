@@ -1,30 +1,32 @@
 import 'package:poc_archi/data/models/post.dart';
-import 'package:poc_archi/data/sources/api_client.dart';
+import 'package:poc_archi/data/repositories/posts.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'notifier.g.dart';
+
+int _globalIndex = 200;
 
 @riverpod
 class Posts extends _$Posts {
   @override
   FutureOr<List<Post>> build() {
-    final datas = ref.watch(apiPostsProvider).asData?.value ?? [];
-    final search = ref.watch(searchBarServiceProvider);
-
-    return datas
-        .where(
-          (post) => post.title.toLowerCase().contains(search),
-        )
-        .toList();
+    return ref.watch(postRepositoryProvider).getPost();
   }
 
   void addPost() async {
-    final previouState = await future;
+    _globalIndex++;
 
-    state = AsyncData([
-      const Post(id: 1, title: 'title', body: 'body'),
-      ...previouState,
-    ]);
+    final newPost = Post(
+      id: _globalIndex,
+      title: 'title $_globalIndex',
+      body: 'body',
+    );
+
+    ref.read(postRepositoryProvider).addPost(newPost);
+
+    print('PostNotifier: add ${newPost.id}');
+
+    ref.invalidateSelf();
   }
 }
 
@@ -32,10 +34,27 @@ class Posts extends _$Posts {
 class SearchBarService extends _$SearchBarService {
   @override
   String build() {
-    return 'azerty';
+    return '';
   }
 
   void search(String value) {
+    print('Search: update $value');
     state = value.toLowerCase();
+  }
+}
+
+@riverpod
+class FilteredPost extends _$FilteredPost {
+  @override
+  FutureOr<List<Post>> build() async {
+    final search = ref.watch(searchBarServiceProvider);
+    final datas = await ref.watch(postsProvider.future);
+    print('Filter: update ${datas.length}');
+
+    return datas
+        .where(
+          (post) => post.title.toLowerCase().contains(search),
+        )
+        .toList();
   }
 }

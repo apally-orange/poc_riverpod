@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_client.dart';
+part of 'local_data.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$apiPostsHash() => r'aa1daeadd3f6931e64f56df711bbd68046f32389';
+String _$cachePostHash() => r'5bd6e875dad56b074f694fd6fe82d7f39d2ff438';
 
-/// See also [apiPosts].
-@ProviderFor(apiPosts)
-final apiPostsProvider = AutoDisposeFutureProvider<List<Post>>.internal(
-  apiPosts,
-  name: r'apiPostsProvider',
+/// See also [cachePost].
+@ProviderFor(cachePost)
+final cachePostProvider = AutoDisposeProvider<CachePost>.internal(
+  cachePost,
+  name: r'cachePostProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$apiPostsHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$cachePostHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef ApiPostsRef = AutoDisposeFutureProviderRef<List<Post>>;
+typedef CachePostRef = AutoDisposeProviderRef<CachePost>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

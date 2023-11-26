@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:poc_archi/core/config.dart';
 import 'package:poc_archi/router/router.dart';
 
 void main() {
   runApp(
-    const ProviderScope(
-      child: MainApp(),
+    ProviderScope(
+      overrides: [
+        configProvider.overrideWithValue(Config.dev()),
+      ],
+      child: const MainApp(),
     ),
   );
 }

@@ -21,13 +21,15 @@ class DetailView extends ConsumerWidget {
       overrides: [
         _currentPostProvider.overrideWithValue(post),
       ],
-      child: const Scaffold(
-        body: Center(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Poc'),
+        ),
+        body: const Center(
           child: _InnerView(),
         ),
       ),
     );
-    //const _InnerView();
   }
 }
 
